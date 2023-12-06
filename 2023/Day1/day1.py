@@ -1,6 +1,6 @@
 import re
 
-file = open("1/text.txt", "r")
+file = open("2023/Day1/text.txt", "r")
 sample = file.readlines()
 day_1 = []
 for char in sample:
