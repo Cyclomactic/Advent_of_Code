@@ -10,7 +10,7 @@ num_dict = {
     'nine':'9'
 }
 
-file = '2023/Day1/text.txt'
+file = '2023/Day1/input/text.txt'
 with open(file, 'r') as text:
     cal_values = []
     for line in text:
