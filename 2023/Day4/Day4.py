@@ -1,4 +1,5 @@
 import re
+import time
 
 
 file_v = 'text'
@@ -61,4 +62,9 @@ def get_game_num(line):
     game_num = num_search.group()
     return game_num
 
+start = time.time()
+
 main()
+
+taken = time.time() - start
+print(taken)
