@@ -1,19 +1,20 @@
-from datetime import datetime
+from time import time
 
+file_v = 'text'
+file = '2023/Day6/input/' + file_v + '.txt'
 
-file_v = 'sample'
-if file_v == 'sample':
-    file = '2023/Day?/input/sample.txt'
-else:
-    file = '2023/Day?/input/text.txt'
+def timer(func):
+    def wrap_function(*args, **kwargs):
+        t1 = time()
+        try:
+            result = func(*args, **kwargs)
+            return result
+        finally:
+            t2 = time()
+            print(f'Function {func.__name__!r} executed in {(t2-t1): .4f}s')
+    return wrap_function
 
+@timer
 def main():
-    print(datetime.now())
-
-start = datetime.now()
-print(start)
-
+    pass
 main()
-
-taken = datetime.now() - start
-print('Time to finish: ' + str(taken))
