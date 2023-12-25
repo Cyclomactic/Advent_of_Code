@@ -21,7 +21,7 @@ def main():
     with open(file) as data:
         for line in data:
               text = re.findall(r'-?\d+', line)
-              ints = [eval(i) for i in text]
+              ints = [int(i) for i in text]
               histories.append(ints)
     
     next_values = []
