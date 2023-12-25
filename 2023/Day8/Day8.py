@@ -41,6 +41,7 @@ def main():
     r_l_index = 0
     r_l_len = len(r_ls)
     print(r_l_len)
+    # (\S{2}+A)
     start_str = 'AAA'
     start_tuple = find_index(maps, start_str, location=None)
     start_map = start_tuple[0]
