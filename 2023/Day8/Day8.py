@@ -3,7 +3,7 @@ from time import time
 from utils import timer
 
 
-file_v = 'text'
+file_v = 'part2_sample'
 file = '2023/Day8/input/' + file_v + '.txt'
 
 @timer
@@ -26,42 +26,15 @@ def main():
         maps.append(line_clean)
         line_num += 1
 
-    # follow maps
-    r_l_index = 0
-    r_l_len = len(r_ls)
-    print(r_l_len)
-    # (\S{2}+A)
-    start_str = 'AAA'
-    start_tuple = find_index(maps, start_str, location=None)
-    start_map = start_tuple[0]
-    end_str = start_str
-    repititions = 0
-    while end_str != 'ZZZ':
-        for r_l in r_ls:
-            r_l_index += 1
-            if repititions % 500000 == 0:
-                print(repititions)
-            if r_l == 'R':
-                end_str = maps[start_map][2]
-                if end_str == 'ZZZ':
-                    repititions += 1
-                    break
-                end_tuple = find_index(maps, end_str, location=(start_map, 2))
-                start_map = end_tuple[0]
-                repititions += 1
-                if r_l_index == r_l_len:
-                    r_l_index = 0
-            else:
-                end_str = maps[start_map][1]
-                if end_str == 'ZZZ':
-                    repititions += 1
-                    break
-                end_tuple = find_index(maps, end_str, location=(start_map, 1))
-                start_map = end_tuple[0]
-                repititions += 1
-                if r_l_index == r_l_len:
-                    r_l_index = 0
-    print('repititions = ' + str(repititions))
+    # follow maps: part 1
+    start_string = 'AAA'
+    end_string = 'ZZZ'
+    start_tuple = find_index(maps, start_string, location=None)
+    part1 = follow_maps(start_tuple, start_string, r_ls, maps, end_string)
+    print('Part 1 answer: ' + str(part1[0]))
+
+    # follow maps: part 2
+    # (\S+Z)
 
 
 def find_index(maps, string, location):
@@ -81,6 +54,34 @@ def find_index(maps, string, location):
                         pass
                     else:
                         return start_index, map_index
+
+
+def follow_maps(start_tuple, start_string, r_ls, maps, end_string):
+    r_l_index = 0
+    r_l_len = len(r_ls)
+    start_map = start_tuple[0]
+    end_str = start_string
+    repititions = 0
+    while end_str != end_string:
+        for r_l in r_ls:
+            r_l_index += 1
+            if repititions % 500000 == 0:
+                print(repititions)
+            if r_l == 'R':
+                end_str = maps[start_map][2]
+                end_tuple = find_index(maps, end_str, location=(start_map, 2))
+            else:
+                end_str = maps[start_map][1]
+                end_tuple = find_index(maps, end_str, location=(start_map, 1))
+            if end_str == end_string:
+                    repititions += 1
+                    break
+            start_map = end_tuple[0]
+            repititions += 1
+            if r_l_index == r_l_len:
+                r_l_index = 0
+    print('repititions = ' + str(repititions))
+    return repititions, end_tuple
 
 
 main()
