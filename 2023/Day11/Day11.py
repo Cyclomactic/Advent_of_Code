@@ -55,14 +55,22 @@ def main():
     print('empty_column: ' + str(empty_columns))
 
     # measure between galaxies
+    # part 1
     paths = []
     for start_galaxy, start_location in enumerate(galaxies, 0):
-        measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows)
+        measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, 1)
     sum_paths = sum(paths)
     print('Part 1 answer: ' + str(sum_paths))
 
+    # part 2
+    paths = []
+    for start_galaxy, start_location in enumerate(galaxies, 0):
+        measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, 999999)
+    sum_paths = sum(paths)
+    print('Part 2 answer: ' + str(sum_paths))
 
-def measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows):
+
+def measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, multiplier):
     for galaxy, location in enumerate(galaxies, 0):
         if start_galaxy < galaxy:
             row_to_sub_from = location[0]
@@ -70,12 +78,12 @@ def measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empt
             add_distance = 0
             for row in empty_rows:
                 if start_location[0] < row < row_to_sub_from or start_location[0] > row > row_to_sub_from:
-                    add_distance += 1
+                    add_distance += multiplier
             col_to_sub_from = location[1]
             col_distance = col_to_sub_from - start_location[1]
             for col in empty_columns:
                 if start_location[1] < col < col_to_sub_from or start_location[1] > col > col_to_sub_from:
-                    add_distance += 1
+                    add_distance += multiplier
             distance = abs(col_distance) + abs(row_distance) + add_distance
             paths.append(distance)
     return 
