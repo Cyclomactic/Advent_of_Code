@@ -34,7 +34,7 @@ def main():
     # find empty rows and columns
     empty_rows = []
     for index, row in enumerate(lines, 0):
-        has_galaxy = re.search(r'(#)', row)
+        has_galaxy = re.search(r'#', row)
         if has_galaxy is None:
             empty_rows.append(index)
 
@@ -56,22 +56,24 @@ def main():
 
     # measure between galaxies
     # part 1
-    paths = []
+    paths = 0
     for start_galaxy, start_location in enumerate(galaxies, 0):
-        measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, 1)
-    sum_paths = sum(paths)
-    print('Part 1 answer: ' + str(sum_paths))
+        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 1)
+        paths += path
+    print('Part 1 answer: ' + str(paths))
 
     # part 2
-    paths = []
+    paths = 0
     for start_galaxy, start_location in enumerate(galaxies, 0):
-        measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, 999999)
-    sum_paths = sum(paths)
-    print('Part 2 answer: ' + str(sum_paths))
+        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 999999)
+        paths += path
+    print('Part 2 answer: ' + str(paths))
 
 
-def measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empty_rows, multiplier):
+def measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, multiplier):
+    distances = 0
     for galaxy, location in enumerate(galaxies, 0):
+        distance = 0
         if start_galaxy < galaxy:
             row_to_sub_from = location[0]
             row_distance = row_to_sub_from - start_location[0]
@@ -85,8 +87,9 @@ def measuring(galaxies, start_galaxy, start_location, paths, empty_columns, empt
                 if start_location[1] < col < col_to_sub_from or start_location[1] > col > col_to_sub_from:
                     add_distance += multiplier
             distance = abs(col_distance) + abs(row_distance) + add_distance
-            paths.append(distance)
-    return 
+            distances += distance
+    return distances
+
 
 def test(line, x, column_test):
     if line[x] == '#':
