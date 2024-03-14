@@ -4,8 +4,8 @@ file = open("2023/Day1/input/text.txt", "r")
 sample = file.readlines()
 day_1 = []
 for char in sample:
-    first_num = re.search(r'[0-9]',char)
-    last_num = re.search(r'(\d)(?!.*\d)',char)
+    first_num = re.search(r'[0-9]', char)
+    last_num = re.search(r'(\d)(?!.*\d)', char)
     if first_num:
         elem = (first_num.group() + last_num.group())
         day_1.append(int(elem))
