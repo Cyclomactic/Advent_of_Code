@@ -1,27 +1,26 @@
-import pprint
 import re
 
 
 sample_numbers = {
-    0 : dict(line_num=0, integer=467, start=0, end=3),
-    5 : dict(line_num=0, integer= 114, start= 5, end= 8),
-    2002 : dict(line_num=2, integer= 35, start= 2, end= 4),
-    2006 : dict(line_num=2, integer= 633, start= 6, end= 9),
-    4000 : dict(line_num=4, integer= 617, start= 0, end= 3),
-    5007 : dict(line_num=5, integer= 58, start= 7, end= 9),
-    6002 : dict(line_num=6, integer= 592, start= 2, end= 5),
-    7006 : dict(line_num=7, integer= 755, start= 6, end= 9),
-    9001 : dict(line_num=9, integer= 664, start= 1, end= 4),
-    9005 : dict(line_num=9, integer= 598, start= 5, end= 8),
+    0: dict(line_num=0, integer=467, start=0, end=3),
+    5: dict(line_num=0, integer=114, start=5, end=8),
+    2002: dict(line_num=2, integer=35, start=2, end=4),
+    2006: dict(line_num=2, integer=633, start=6, end=9),
+    4000: dict(line_num=4, integer=617, start=0, end=3),
+    5007: dict(line_num=5, integer=58, start=7, end=9),
+    6002: dict(line_num=6, integer=592, start=2, end=5),
+    7006: dict(line_num=7, integer=755, start=6, end=9),
+    9001: dict(line_num=9, integer=664, start=1, end=4),
+    9005: dict(line_num=9, integer=598, start=5, end=8),
 }
 
 sample_symbols = {
-    1003 : dict(line_num=1, symbol='*', position=3),
-    3006 : dict(line_num=3, symbol='#', position=6),
-    4003 : dict(line_num=4, symbol='*', position=3),
-    5005 : dict(line_num=5, symbol='+', position=5),
-    8003 : dict(line_num=8, symbol='$', position=3),
-    8005 : dict(line_num=8, symbol='*', position=5),
+    1003: dict(line_num=1, symbol='*', position=3),
+    3006: dict(line_num=3, symbol='#', position=6),
+    4003: dict(line_num=4, symbol='*', position=3),
+    5005: dict(line_num=5, symbol='+', position=5),
+    8003: dict(line_num=8, symbol='$', position=3),
+    8005: dict(line_num=8, symbol='*', position=5),
 }
 
 
@@ -36,19 +35,19 @@ def main():
             sym_pos = 0
             integer_findall = []
             integer_findall = re.findall(r'([^.%+*#@=$&\/\-\s]+)', line)
-            if integer_findall != None:
+            if integer_findall is not None:
                 for integer in integer_findall:
                     num_dict = build_num_dict(integer, line, line_num, num_pos)
                     numbers[key_func(line_num, num_dict['start'])] = num_dict
                     num_pos = num_dict['end']
             symbol_findall = []
             symbol_findall = re.findall(r'([^.0-9\s])', line)
-            if symbol_findall != None:
+            if symbol_findall is not None:
                 for symbol in symbol_findall:
                     sym_dict = build_sym_dict(symbol, line, line_num, sym_pos)
-                    symbols[key_func(line_num, sym_dict['position'])] = sym_dict
+                    symbols[key_func(line_num, sym_dict['position'])] = sym_dict  # noqa: E501
                     sym_pos = sym_dict['position'] + 1
-            line_num = line_num + 1 
+            line_num = line_num + 1
 
         # part 1
         part_numbers = []
@@ -64,7 +63,7 @@ def main():
                     if index_range_start-1 <= check_pos <= index_range_end:
                         print(numbers[number]['integer'])
                         part_numbers.append(numbers[number]['integer'])
-                        p_n.append(str([numbers[number]['line_num']]) + ' : ' + str( numbers[number]['integer']))
+                        p_n.append(str([numbers[number]['line_num']]) + ' : ' + str(numbers[number]['integer']))  # noqa: E501
                         pass
 
         # print(part_numbers)
@@ -88,19 +87,18 @@ def main():
                             for number in numbers:
                                 if number != first_match[0]:
                                     line_number = numbers[number]['line_num']
-                                    index_range_start = numbers[number]['start']
+                                    index_range_start = numbers[number]['start']  # noqa: E501
                                     index_range_end = numbers[number]['end']
-                                    if check_line-1 <= line_number <= check_line+1:
-                                        if index_range_start-1 <= check_pos <= index_range_end:
-                                            second_match = (number, numbers[number]['integer'])
-                                            ratio = first_match[1] * second_match[1]
-                                            gear_ratios.append(ratio) 
+                                    if check_line-1 <= line_number <= check_line+1:  # noqa: E501
+                                        if index_range_start-1 <= check_pos <= index_range_end:  # noqa: E501
+                                            second_match = (number, numbers[number]['integer'])  # noqa: E501
+                                            ratio = first_match[1] * second_match[1]  # noqa: E501
+                                            gear_ratios.append(ratio)
         print(gear_ratios)
         del gear_ratios[1::2]
         print(gear_ratios)
         sum_gears = sum(gear_ratios)
         print('Part 2 answer- sum of gear raitios: ' + str(sum_gears))
-
 
 
 def build_num_dict(integer, line, line_num, num_pos):
@@ -116,6 +114,7 @@ def build_num_dict(integer, line, line_num, num_pos):
     )
     return num_dict
 
+
 def build_sym_dict(symbol, line, line_num, sym_pos):
     position = line.find(symbol, sym_pos)
     sym_dict = dict(
@@ -125,7 +124,10 @@ def build_sym_dict(symbol, line, line_num, sym_pos):
     )
     return sym_dict
 
+
 def key_func(line_num, start):
     key = (line_num * 1000) + start
     return key
+
+
 main()

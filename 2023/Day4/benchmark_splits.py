@@ -4,7 +4,7 @@ from typing import List
 
 
 def load_input(year: int, day: int) -> List[str]:
-    with open(f'2023/Day4/input/text.txt') as file:
+    with open('2023/Day4/input/text.txt') as file:
         return list(file)
 
 
@@ -18,7 +18,7 @@ def cyclo():
         pipe = line.find('|')
         part = line[colon:pipe]
         line_parts = line.partition(part)
-        winning_nums = set(int(x) for x in re.findall(r'[0-9]+', line_parts[1]))
+        winning_nums = set(int(x) for x in re.findall(r'[0-9]+', line_parts[1]))  # noqa: E501
         my_nums = set(int(x) for x in re.findall(r'[0-9]+', line_parts[2]))
         data.append((winning_nums, my_nums))
     return data
@@ -42,8 +42,8 @@ def kozzi_minimal_regex():
         if line == '':
             continue
         parts = re.split(':|\\|', line)
-        winning_nums = set(int(num) for num in parts[1].strip().split(' ') if num != '')
-        my_nums = set(int(num) for num in parts[2].strip().split(' ') if num != '')
+        winning_nums = set(int(num) for num in parts[1].strip().split(' ') if num != '')  # noqa: E501
+        my_nums = set(int(num) for num in parts[2].strip().split(' ') if num != '')  # noqa: E501
         data.append((winning_nums, my_nums))
     return data
 
@@ -57,8 +57,8 @@ def kozzi_no_regex():
         pipe = line.find('|')
         part1 = line[colon+1:pipe]
         part2 = line[pipe+1:]
-        winning_nums = set(int(num) for num in part1.strip().split(' ') if num != '')
-        my_nums = set(int(num) for num in part2.strip().split(' ') if num != '')
+        winning_nums = set(int(num) for num in part1.strip().split(' ') if num != '')  # noqa: E501
+        my_nums = set(int(num) for num in part2.strip().split(' ') if num != '')  # noqa: E501
         data.append((winning_nums, my_nums))
     return data
 
@@ -130,5 +130,5 @@ if __name__ == '__main__':
     for function_name in functions:
         print('{:30s} = {:.6f} s'.format(
             function_name,
-            timeit.timeit(function_name + '()', globals=locals(), number=iterations)
+            timeit.timeit(function_name + '()', globals=locals(), number=iterations)  # noqa: E501
         ))

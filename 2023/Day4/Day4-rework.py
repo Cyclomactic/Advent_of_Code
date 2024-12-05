@@ -4,9 +4,10 @@ import time
 
 file_v = 'text'
 if file_v == 'sample':
-    file = '2023/Day4/input/sample.txt' 
+    file = '2023/Day4/input/sample.txt'
 else:
     file = '2023/Day4/input/text.txt'
+
 
 def main():
     with open(file, 'r') as text:
@@ -26,11 +27,11 @@ def main():
             winning_nums = set(re.findall(r'[0-9]+', line_parts[1]))
             my_nums = set(re.findall(r'[0-9]+', line_parts[2]))
             result = winning_nums.intersection(my_nums)
-            
+
             num_points = len(result)
-            if num_points != 0:           
-                exponent=num_points-1
-                base=2
+            if num_points != 0:
+                exponent = num_points-1
+                base = 2
                 point_value = 1
                 x = point_value*pow(base, exponent)
                 points.append(x)
@@ -42,12 +43,13 @@ def main():
                 card_iters = game_nums[game_num]
                 game_nums[card_to_add_to] += card_iters
                 num += 1
-            game_num += 1     
+            game_num += 1
 
         part1_total = sum(points)
         print('Part 1 answer = ' + str(part1_total))
         part2_total = sum(game_nums.values())
         print('Part 2 answer = ' + str(part2_total))
+
 
 def get_game_num(line):
     colon = line.find(':')
@@ -58,7 +60,9 @@ def get_game_num(line):
     game_num = int(num_search.group())
     return game_num
 
+
 start = time.time()
+
 
 main()
 

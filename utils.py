@@ -1,5 +1,6 @@
 from time import time
 
+
 def timer(func):
     def wrap_function(*args, **kwargs):
         t1 = time()

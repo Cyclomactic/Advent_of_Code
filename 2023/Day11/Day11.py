@@ -22,7 +22,7 @@ def main():
         row_len = len(row)
         col_index = 0
         while col_index < row_len:
-            galaxy = row.find('#',col_index)
+            galaxy = row.find('#', col_index)
             if galaxy >= 0:
                 col_index = galaxy + 1
             else:
@@ -45,12 +45,12 @@ def main():
         for line in lines:
             test(line, x, column_test)
             if column_test == []:
-                x += 1  
+                x += 1
                 break
         if len(column_test) == len(lines):
             empty_columns.append(x)
-            x += 1 
-            column_test = []     
+            x += 1
+            column_test = []
     print('empty_row: ' + str(empty_rows))
     print('empty_column: ' + str(empty_columns))
 
@@ -58,19 +58,19 @@ def main():
     # part 1
     paths = 0
     for start_galaxy, start_location in enumerate(galaxies, 0):
-        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 1)
+        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 1)  # noqa: E501
         paths += path
     print('Part 1 answer: ' + str(paths))
 
     # part 2
     paths = 0
     for start_galaxy, start_location in enumerate(galaxies, 0):
-        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 999999)
+        path = measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, 999999)  # noqa: E501
         paths += path
     print('Part 2 answer: ' + str(paths))
 
 
-def measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, multiplier):
+def measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows, multiplier):  # noqa: E501
     distances = 0
     for galaxy, location in enumerate(galaxies, 0):
         distance = 0
@@ -79,12 +79,12 @@ def measuring(galaxies, start_galaxy, start_location, empty_columns, empty_rows,
             row_distance = row_to_sub_from - start_location[0]
             add_distance = 0
             for row in empty_rows:
-                if start_location[0] < row < row_to_sub_from or start_location[0] > row > row_to_sub_from:
+                if start_location[0] < row < row_to_sub_from or start_location[0] > row > row_to_sub_from:  # noqa: E501
                     add_distance += multiplier
             col_to_sub_from = location[1]
             col_distance = col_to_sub_from - start_location[1]
             for col in empty_columns:
-                if start_location[1] < col < col_to_sub_from or start_location[1] > col > col_to_sub_from:
+                if start_location[1] < col < col_to_sub_from or start_location[1] > col > col_to_sub_from:  # noqa: E501
                     add_distance += multiplier
             distance = abs(col_distance) + abs(row_distance) + add_distance
             distances += distance

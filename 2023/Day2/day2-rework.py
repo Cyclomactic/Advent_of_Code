@@ -22,7 +22,7 @@ with open(file, 'r') as text:
             count = 0
             pos = 0
             while count < names_counts[color]:
-                key_pos = line.find(color,pos)
+                key_pos = line.find(color, pos)
                 pos = key_pos + 1
                 key_int_index = key_pos - 3
                 key_int = line[key_int_index:key_pos-1]

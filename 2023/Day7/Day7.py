@@ -6,6 +6,7 @@ from utils import timer
 file_v = 'simple_sample'
 file = '2023/Day7/input/' + file_v + '.txt'
 
+
 @timer
 def main():
     # parse input file
@@ -19,7 +20,7 @@ def main():
         ('9', 8),
         ('8', 7),
         ('7', 6),
-        ('6', 5), 
+        ('6', 5),
         ('5', 4),
         ('4', 3),
         ('3', 2),
@@ -33,7 +34,7 @@ def main():
         ('9', 9),
         ('8', 8),
         ('7', 7),
-        ('6', 6), 
+        ('6', 6),
         ('5', 5),
         ('4', 4),
         ('3', 3),
@@ -55,7 +56,7 @@ def main():
     one_pair_1 = p1_sorts[5]
     high_card_1 = p1_sorts[6]
 
-    #part 2 sort hands
+    # part 2 sort hands
     p2_sorts = sorting(hands, lables_2, 2)
     five_of_a_kind_2 = p2_sorts[0]
     four_of_a_kind_2 = p2_sorts[1]
@@ -64,7 +65,7 @@ def main():
     two_pair_2 = p2_sorts[4]
     one_pair_2 = p2_sorts[5]
     high_card_2 = p2_sorts[6]
-   
+
     # evaluate hands and rank them
     part_1_evals = evaluating(
         high_card_1,
@@ -105,52 +106,51 @@ def evaluating(
         three_of_a_kind,
         full_house,
         four_of_a_kind,
-        five_of_a_kind, 
+        five_of_a_kind,
         lables,
-    ):
+):
     all_hands_ranked = []
     rank = 0
     high_card_ranked = ordering(high_card, lables, rank)
     # print(high_card_ranked[0])
     rank = high_card_ranked[1]
     all_hands_ranked.extend(high_card_ranked[0])
-    print('all hands time: ' + str(time()))
+    print('all hands time: ' + str(timer()))
 
     one_pair_ranked = ordering(one_pair, lables, rank)
     # print(one_pair_ranked[0])
     rank = one_pair_ranked[1]
     all_hands_ranked.extend(one_pair_ranked[0])
-    print('one pair time: ' + str(time()))
+    print('one pair time: ' + str(timer()))
 
     two_pair_ranked = ordering(two_pair, lables, rank)
     # print(two_pair_ranked[0])
     rank = two_pair_ranked[1]
     all_hands_ranked.extend(two_pair_ranked[0])
-    print('two pair time: ' + str(time()))
-    
+    print('two pair time: ' + str(timer()))
+
     three_of_a_kind_ranked = ordering(three_of_a_kind, lables, rank)
     # print(three_of_a_kind_ranked[0])
     rank = three_of_a_kind_ranked[1]
     all_hands_ranked.extend(three_of_a_kind_ranked[0])
-    print('three of a kind time: ' + str(time()))
-    
+    print('three of a kind time: ' + str(timer()))
+
     full_house_ranked = ordering(full_house, lables, rank)
     # print(full_house_ranked[0])
     rank = full_house_ranked[1]
     all_hands_ranked.extend(full_house_ranked[0])
-    print('full house time: ' + str(time()))
-    
+    print('full house time: ' + str(timer()))
+
     four_of_a_kind_ranked = ordering(four_of_a_kind, lables, rank)
     # print(four_of_a_kind_ranked[0])
     rank = four_of_a_kind_ranked[1]
     all_hands_ranked.extend(four_of_a_kind_ranked[0])
-    print('four of a kind time: ' + str(time()))
+    print('four of a kind time: ' + str(timer()))
 
-    
     five_of_a_kind_ranked = ordering(five_of_a_kind, lables, rank)
     # print(five_of_a_kind_ranked[0])
     all_hands_ranked.extend(five_of_a_kind_ranked[0])
-    print('five of a kind time: ' + str(time()))
+    print('five of a kind time: ' + str(timer()))
     # high_card = []
     # one_pair = []
     # two_pair = []
@@ -248,7 +248,7 @@ def sorting(hands, lables, part):
                 one_pair.append(line)
             else:
                 high_card.append(line)
-    return five_of_a_kind, four_of_a_kind, full_house, three_of_a_kind, two_pair, one_pair, high_card
+    return five_of_a_kind, four_of_a_kind, full_house, three_of_a_kind, two_pair, one_pair, high_card  # noqa: E501
 
 
 def sorting_4_2(
@@ -257,7 +257,7 @@ def sorting_4_2(
         joker,
         five_of_a_kind,
         four_of_a_kind
-    ):
+):
     if lable_key == 'J':
         five_of_a_kind.append(line)
         return
@@ -279,7 +279,7 @@ def sorting_3_2(
         four_of_a_kind,
         full_house,
         three_of_a_kind,
-    ):
+):
     if lable_key == 'J':
         for card in lables:
             card_key = card[0]
@@ -293,7 +293,7 @@ def sorting_3_2(
     if joker == 2:
         five_of_a_kind.append(line)
         return
-    elif joker ==1:
+    elif joker == 1:
         four_of_a_kind.append(line)
         return
     for card in lables:
@@ -314,7 +314,7 @@ def sorting_3(
         line,
         full_house,
         three_of_a_kind,
-    ):
+):
     for card in lables:
         card_key = card[0]
         test2 = hand.count(card_key)
@@ -338,7 +338,7 @@ def sorting_2_2(
         full_house,
         two_pair,
         one_pair,
-    ):
+):
     if lable_key == 'J':
         for card in lables:
             card_key = card[0]
@@ -414,7 +414,7 @@ def ordering(given_list, lables, rank):
             for character in characters:
                 for lable in lables:
                     if character == lable[0]:
-                        character_value = int(character.replace(character, str(lable[1])))
+                        character_value = int(character.replace(character, str(lable[1])))  # noqa: E501
                         character_values.append(character_value)
                         break
             new_hand.insert(0, character_values)

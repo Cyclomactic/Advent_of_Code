@@ -6,6 +6,7 @@ from utils import timer
 file_v = 'text'
 file = '2023/Day6/input/' + file_v + '.txt'
 
+
 @timer
 def main():
     # Part 1 parse input data
@@ -26,8 +27,8 @@ def main():
     print(p2_distances)
 
     # Part 1
-    ways_to_beat_record = []  
-    races = list(zip(times,distances))
+    ways_to_beat_record = []
+    races = list(zip(times, distances))
     for race in races:
         race_time = int(race[0])
         record = int(race[1])
@@ -38,7 +39,7 @@ def main():
             run_time = race_time-button_press
             run_distance = button_press*run_time
             if run_distance > record:
-                wins +=1
+                wins += 1
             if run_distance > distance_traveled:
                 distance_traveled = run_distance
             button_press += 1
@@ -50,8 +51,8 @@ def main():
     print('Part 1 answer: ' + str(margin_of_error))
 
     # Part 2
-    ways_to_beat_record = []  
-    races = list(zip(p2_times,p2_distances))
+    ways_to_beat_record = []
+    races = list(zip(p2_times, p2_distances))
     for race in races:
         race_time = int(race[0])
         record = int(race[1])
@@ -62,7 +63,7 @@ def main():
             run_time = race_time-button_press
             run_distance = button_press*run_time
             if run_distance > record:
-                wins +=1
+                wins += 1
             if run_distance > distance_traveled:
                 distance_traveled = run_distance
             button_press += 1
@@ -70,5 +71,6 @@ def main():
         print('# of wins: ' + str(wins))
         ways_to_beat_record.append(wins)
     print('Part 2 answer: ' + str(ways_to_beat_record))
-main()
 
+
+main()

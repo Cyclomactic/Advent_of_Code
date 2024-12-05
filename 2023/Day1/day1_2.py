@@ -47,7 +47,7 @@ with open(file, 'r') as text:
                             key_pos = line.rfind(key)
                             if key_pos == pos:
                                 last_digit = num_dict[key]
-                                break                  
+                                break
         cal_num = int(first_cal_digit + last_digit)
         print(cal_num)
         cal_values.append(cal_num)
