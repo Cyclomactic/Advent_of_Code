@@ -108,7 +108,15 @@ def chunk(pairs, chunk_size=10_000_000):
 
 
 def find_min_seed(params):
-    task_id, item, seeds_to_soil_map, soil_to_fert_map, fert_to_water_map, water_to_light_map, light_to_temp_map, temp_to_humid_map, humid_to_loc_map = params  # noqa: E501
+    (task_id,
+        item,
+        seeds_to_soil_map,
+        soil_to_fert_map,
+        fert_to_water_map,
+        water_to_light_map,
+        light_to_temp_map,
+        temp_to_humid_map,
+        humid_to_loc_map) = params
 
     part_2_locations = 1000000000000
     print(f"{item} @ {timer()}")
